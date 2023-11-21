@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./components/partials/header/header.component";
+import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from "./components/pages/home/home.component";
+import { FoodPageComponent } from './components/pages/food-page/food-page.component';
+import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
+import { HeaderComponent } from './components/partials/header/header.component';
+
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    imports: [CommonModule, RouterOutlet, HeaderComponent, RouterLink, HomeComponent]
+    imports: [CommonModule, RouterOutlet, HeaderComponent, HomeComponent, FoodPageComponent, CartPageComponent]
 })
 export class AppComponent {
 	title = 'frontend';
