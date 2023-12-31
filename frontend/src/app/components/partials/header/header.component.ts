@@ -13,9 +13,9 @@ import { CartService } from '../../../services/cart.service';
 export class HeaderComponent {
   cartQuantity = 0;
 
-  /* constructor(cartService: CartService) {
+  constructor(cartService: CartService) {
 		cartService.getCartObservable().subscribe((newCart) => {
 			this.cartQuantity = newCart.totalCount;
 		})
-	} */
+	}
 }

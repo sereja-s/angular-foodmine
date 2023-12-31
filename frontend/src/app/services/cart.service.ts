@@ -3,6 +3,7 @@ import { Cart } from '../shared/models/Cart';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Food } from '../shared/models/Food';
 import { CartItem } from '../shared/models/CartItem';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,18 @@ export class CartService {
 
 	// определим поле(свойство) в котором будет храниться корзина и сохраним в нём экземпляр корзины
 	private cart: Cart = this.getCartFromLocalStorage();
-	
+
+	// свойство: предмет корзины, который имеет тип субъекта поведения и по умолчанию равно новому субъекту поведения для этой корзины
 	private cartSubject: BehaviorSubject<Cart> = new BehaviorSubject(this.cart);
 
-  constructor() { }
+  constructor(private localStorage: StorageService) { }
 
 	/**
 	 * Добавление товара в корзину	
 	 */
 	addToCart(food: Food): void {
 	  
-	  let cartItem = this.cart.items.find(item => item.food.id === food.id);
+	  let cartItem = this.cart.items.find((item) => item.food.id === food.id);
 	  
 	if (cartItem)
 	  return;
@@ -38,17 +40,18 @@ export class CartService {
 	 */
 	removeFromCart(foodId: string): void {
 
-		this.cart.items = this.cart.items.filter(item => item.food.id != foodId);
+		this.cart.items = this.cart.items.filter((item) => item.food.id != foodId);
 
 		this.setCartToLocalStorage();
-	 }
-/**
- * Изменение количества товаров в корзине
- */
+	}
+	
+	/**
+	 * Изменение количества товаров в корзине
+	 */
 	changeQuantity(foodId: string, quantity: number) {
 		 
 		// найдём элемент в корзине с идентификатором переданным в параметры
-		let cartItem = this.cart.items.find(item => item.food.id === foodId);
+		let cartItem = this.cart.items.find((item) => item.food.id === foodId);
 
 		if (!cartItem) return;
   
@@ -94,7 +97,7 @@ export class CartService {
 		// перобразуем объект корзины в json-строку и сохраним в переменной
 		const cartJson = JSON.stringify(this.cart);
 		// установим ключ локального хранилища и передадим json-строку с нашей корзиной
-		localStorage.setItem('Cart', cartJson);
+		this.localStorage.setItem('Cart', cartJson);
 
 		// говорим всем слушателям корзины, установленной в локальное хранилище, что в ней произошли изменения
 		this.cartSubject.next(this.cart);
@@ -105,7 +108,7 @@ export class CartService {
   */
 	private getCartFromLocalStorage(): Cart {
 		 
-		const cartJson = localStorage.getItem('Cart');
+		const cartJson = this.localStorage.getItem('Cart');
 		
 		return cartJson ? JSON.parse(cartJson) : new Cart();
 	 }

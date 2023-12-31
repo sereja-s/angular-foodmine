@@ -17,7 +17,7 @@ export class FoodPageComponent {
 
 food!: Food;
 
-// опишем конструктор (в параметрах передаём: 1- активированный маршрут, чтобы прочитать id; 2- Food-сервис; Cart-сервис)
+// опишем конструктор (в параметрах передаём: 1- активированный маршрут, чтобы прочитать id; 2- Food-сервис; 3-Cart-сервис; 4-маршруты)
 constructor(activatedRoute: ActivatedRoute, foodService: FoodService, private cartService: CartService, private router: Router) {
 	
 	activatedRoute.params.subscribe((params) => {

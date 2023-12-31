@@ -96,12 +96,12 @@
  }
  
  .foods-count::before{
-	content:"Count: ";
+	content:"Количество: ";
 	color: grey;
  }
  
  .total-price::before{
-	content: 'Price: ';
+	content: 'Цена: ';
 	color: grey;
  }
  
