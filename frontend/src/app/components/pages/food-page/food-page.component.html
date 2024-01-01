@@ -1,4 +1,11 @@
-<div class="container">
+<!-- Part 10 -->
+<app-not-found
+  [visible]="!food.id"
+  notFoundMessage="Товар не найден"
+  resetLinkText="Вернуться на главную">
+</app-not-found>
+
+<div *ngIf="food.id" class="container">
 	<img [src]="food.imageUrl" [alt]="food.name"/>
  
 	<div class="details">
