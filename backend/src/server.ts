@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
-import { sample_foods, sample_tags } from "./data";
+import { sample_foods, sample_tags, sample_users } from "./data";
+import jwt from "jsonwebtoken";
 
 const app = express();
+
+// чтобы получать запросы в виде JSON запишем внутри API:
+app.use(express.json());
 
 app.use(cors({
     credentials:true,
@@ -37,6 +41,32 @@ app.get("/api/foods/:foodId", (req, res) => {
   const food = sample_foods.find(food => food.id == foodId);
   res.send(food);
 }) 
+
+app.post("/api/users/login", (req, res) => {
+	const {email, password} = req.body;
+	const user = sample_users.find(user => user.email === email 
+	  && user.password === password);
+ 
+	 if(user) {
+	  res.send(generateTokenReponse(user));
+	 }
+	 else{
+		const BAD_REQUEST = 400;
+		res.status(BAD_REQUEST).send("Имя пользователя или пароль не верны!");
+	 }
+ 
+ })
+
+ const generateTokenReponse = (user: any) => {
+	const token = jwt.sign({
+	  email: user.email, isAdmin: user.isAdmin
+	},"SomeRandomText", {
+	  expiresIn:"30d"
+	});
+ 
+	user.token = token;
+	return user;
+ }
 
 // определим константу для порта, используемого бэкэндом
 const port = 5000;
