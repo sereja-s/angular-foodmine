@@ -4,13 +4,17 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TitleComponent } from "../../partials/title/title.component";
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { InputContainerComponent } from "../../partials/input-container/input-container.component";
+import { InputValidationComponent } from '../../partials/input-validation/input-validation.component';
+import { TextInputComponent } from "../../partials/text-input/text-input.component";
+import { DefaultButtonComponent } from '../../partials/default-button/default-button.component';
 
 @Component({
     selector: 'app-login-page',
     standalone: true,
     templateUrl: './login-page.component.html',
     styleUrl: './login-page.component.css',
-    imports: [CommonModule, ReactiveFormsModule, TitleComponent]
+    imports: [CommonModule, ReactiveFormsModule, TitleComponent, InputContainerComponent, InputValidationComponent, TextInputComponent, DefaultButtonComponent]
 })
 export class LoginPageComponent {
 
@@ -28,11 +32,11 @@ export class LoginPageComponent {
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', Validators.required]
 		});
-
+  
 		this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
-		
-	}
 
+	 }
+  
 	/** 
 	 * Метод-геттер (чтобы иметь удобный способ к элементам управления(контроля) формой)
 	 */ 
