@@ -16,8 +16,7 @@ export class HeaderComponent {
 
 	cartQuantity = 0;
 	
-	user!:User;
-	
+	user!:User;	
 
 	constructor(cartService: CartService, private userService: UserService) {
 	  

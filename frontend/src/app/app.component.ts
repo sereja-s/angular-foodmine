@@ -10,17 +10,18 @@ import { InputContainerComponent } from './components/partials/input-container/i
 import { InputValidationComponent } from './components/partials/input-validation/input-validation.component';
 import { TextInputComponent } from './components/partials/text-input/text-input.component';
 import { DefaultButtonComponent } from './components/partials/default-button/default-button.component';
+import { LoadingComponent } from "./components/partials/loading/loading.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-	imports: [CommonModule, RouterOutlet, HeaderComponent, HomeComponent, FoodPageComponent, CartPageComponent, NotFoundComponent,
-		InputContainerComponent,
-		InputValidationComponent,
-		TextInputComponent,
-		DefaultButtonComponent],
+    imports: [CommonModule, RouterOutlet, HeaderComponent, HomeComponent, FoodPageComponent, CartPageComponent, NotFoundComponent,
+        InputContainerComponent,
+        InputValidationComponent,
+        TextInputComponent,
+        DefaultButtonComponent, LoadingComponent]
 })
 	
 export class AppComponent {

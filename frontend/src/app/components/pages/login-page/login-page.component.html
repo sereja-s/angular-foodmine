@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 	<div class="details">
 	  <app-title title="Login"></app-title>
  
@@ -22,9 +22,9 @@
 	  
 	  </form>
 	</div>
- </div>
+ </div> -->
 
- <!-- <div class="container">
+ <div class="container">
 	<div class="details">
 	  <app-title title="Login"></app-title>
  
@@ -52,8 +52,16 @@
 	  </div>
  
 	  <div class="button">
-		 <button type="submit">Login</button>
+		 <button type="submit">Login</button>		
 	  </div>
+	  <div class="register">
+		Новый пользователь? &nbsp;
+		<a routerLink="/register" [queryParams]="{returnUrl : returnUrl}">
+		  Перейти на страницу регистрации
+		</a>
+	 </div>
 	  </form>
 	</div>
- </div> -->
+ </div>
+
+ 

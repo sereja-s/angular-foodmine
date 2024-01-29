@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl } from '@angular/forms';
 
 const VALIDATORS_MESSAGES:any = {
-	required:'поле обязательное для заполнения',
-	email:'Email указан не корректно'
+	required:'Поле обязательное для заполнения',
+	email: 'Email указан не корректно',
+	minlength: 'Field is too short',
+	notMatch: 'Password and Confirm does not match'
  }
 
 @Component({
