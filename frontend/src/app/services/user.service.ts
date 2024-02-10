@@ -28,6 +28,12 @@ export class UserService {
 		this.userObservable = this.userSubject.asObservable();
   }
 
+	// Part 17.1 - Checkout Page
+  public get currentUser():User {
+	return this.userSubject.value;
+ }
+
+
 	/** 
 	 * Метод входа в систему авторизации, который имеет входные данные: имя входа пользователя с типом: интерфейс пользователя
 	*/

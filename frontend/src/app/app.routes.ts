@@ -4,6 +4,8 @@ import { FoodPageComponent } from './components/pages/food-page/food-page.compon
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
+import { CheckoutPageComponent } from './components/pages/checkout-page/checkout-page.component';
+import { authGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
 	// маршрут по умолчанию
@@ -19,5 +21,7 @@ export const routes: Routes = [
 	// маршрут к странице авторизации
 	{ path: 'login', component: LoginPageComponent },
 	// маршрут к странице регистрации
-	{path:'register', component: RegisterPageComponent},
+	{ path: 'register', component: RegisterPageComponent },
+	// маршрут к странице оформления заказа
+	{ path: 'checkout', component: CheckoutPageComponent, canActivate: [authGuard] },
 ];

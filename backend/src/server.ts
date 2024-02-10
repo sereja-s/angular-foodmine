@@ -12,6 +12,7 @@ import foodRouter from "./routers/food.router";
 import userRouter from "./routers/user.router";
 
 import { dbConnect } from "./configs/database.config";
+import orderRouter from "./routers/order.router";
 dbConnect();
 
 const app = express();
@@ -27,6 +28,8 @@ app.use(cors({
 // +Part 14 - Mongo DB Atlas
 app.use("/api/foods", foodRouter);
 app.use("/api/users", userRouter);
+// Part 17.3-Creaing Order
+app.use("/api/orders", orderRouter);
 
 /*  app.get("/api/foods", (req, res) => {
     res.send(sample_foods);

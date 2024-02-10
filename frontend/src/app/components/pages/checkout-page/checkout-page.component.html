@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="content">
+	  <app-title title="Order Form" fontSize="1.6rem"></app-title>
+	  <form [formGroup]="checkoutForm">
+		 <!-- <text-input [control]="fc.name" label="Name"></text-input>
+		 <text-input [control]="fc.address" label="Address"></text-input> -->
+		 <div class="input-container">
+			<label>Имя</label>
+			<div>
+			  <input type="name" placeholder="ваше имя" formControlName="name"/>
+			</div>
+			<!-- <div class="error-list" *ngIf="fc.email.errors && isSubmitted">
+			  <div *ngIf="fc.email.errors.required">укажите ваш Email</div>
+			  <div *ngIf="fc.email.errors.email">Email указан не корректно</div>ng g
+			</div> -->
+		 </div>
+	
+		 <div class="input-container">
+			<label>Адрес</label>
+			<div>
+			  <input type="address" placeholder="Укажите ваш адрес"
+			  formControlName="address"/>
+			</div>
+			<!-- <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
+			  <div *ngIf="fc.password.errors.required">укажите пароль</div>
+			</div> -->
+		 </div>
+	  </form>
+	  <order-items-list [order]="order"></order-items-list>
+	</div>
+	<div class="map">
+	  <app-title
+	  title="Choose Your Address On Map"
+	  fontSize="1.6rem"></app-title>
+
+	  <map [order]="order"></map>
+ 
+	</div>
+	<div class="buttons-container">
+	  <div class="buttons">
+		 <button (click)="createOrder()">
+			Перейти к оплате
+		 </button>
+	  </div>
+	</div>
+ </div>

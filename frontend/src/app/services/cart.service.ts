@@ -80,7 +80,13 @@ export class CartService {
 	getCartObservable(): Observable<Cart> {
 
 		return this.cartSubject.asObservable();
+	}
+	
+	// Part 17.1 - Checkout Page
+	getCart(): Cart{
+		return this.cartSubject.value;
 	 }
+  
 
 	/**
 	 * Метод устанавливает(помещает) объект корзины в локальное хранилище, чтобы он не удалялся при перезагрузке страницы
