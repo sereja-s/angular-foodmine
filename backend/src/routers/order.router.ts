@@ -31,4 +31,34 @@ asyncHander(async (req:any, res:any) => {
 })
 )
 
+// Part 18 - Payment Page
+router.get('/newOrderForCurrentUser', asyncHander( async (req:any,res ) => {
+	// const order= await OrderModel.findOne({user: req.user.id, status: OrderStatus.NEW});
+	// Part 19 - Paypal Buttons
+	const order= await getNewOrderForCurrentUser(req);
+	if(order) res.send(order);
+	else res.status(HTTP_BAD_REQUEST).send();
+}))
+
+// Part 19 - Paypal Buttons
+router.post('/pay', asyncHander( async (req:any, res) => {
+	const {paymentId} = req.body;
+	const order = await getNewOrderForCurrentUser(req);
+	if(!order){
+		 res.status(HTTP_BAD_REQUEST).send('Заказ не найден!');
+		 return;
+	}
+
+	order.paymentId = paymentId;
+	order.status = OrderStatus.PAYED;
+	await order.save();
+
+	res.send(order._id);
+}))
+
 export default router;
+
+// Part 19 - Paypal Buttons
+async function getNewOrderForCurrentUser(req: any) {
+	return await OrderModel.findOne({ user: req.user.id, status: OrderStatus.NEW });
+}

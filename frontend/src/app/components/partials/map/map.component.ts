@@ -15,6 +15,8 @@ export class MapComponent {
 
 	@Input()
 	order!: Order;
+	@Input()
+	readonly = false;
 	private readonly MARKER_ZOOM_LEVEL = 16;
 	private readonly MARKER_ICON = icon({
 		iconUrl:
@@ -27,16 +29,41 @@ export class MapComponent {
 	@ViewChild('map', { static: true })
 	mapRef!: ElementRef;
 	map!: Map;
-	currentMarker!: Marker;
-	
-	
+	currentMarker!: Marker;	
 
 	constructor(private locationService: LocationService) { }
 
-	ngOnInit(): void {
+	ngOnChanges(): void {
 
+		if(!this.order) return;
 		this.initializeMap();
+
+		if(this.readonly && this.addressLatLng){
+			this.showLocationOnReadonlyMode();
+		 }
 	}
+
+	/**
+	 * Метод - показать местоположение на карте в режиме только для чтения (Part 18 - Payment Page)
+	 */
+	showLocationOnReadonlyMode() {
+		// поместим карту в константу
+		const m = this.map;
+		// установим маркер последнего заказа на карте
+		this.setMarker(this.addressLatLng);
+		m.setView(this.addressLatLng, this.MARKER_ZOOM_LEVEL);
+  
+		// отключем доступный функционал для карты в режиме: только для чтени
+		m.dragging.disable();
+		m.touchZoom.disable();
+		m.doubleClickZoom.disable();
+		m.scrollWheelZoom.disable();
+		m.boxZoom.disable();
+		m.keyboard.disable();
+		m.off('click');
+		m.tap?.disable();
+		this.currentMarker.dragging?.disable();
+	 }
 
 	/** 
 	 * Метод инициализации карты
@@ -86,9 +113,17 @@ export class MapComponent {
 	}
 
 	set addressLatLng(latlng: LatLng) {
+
+		// Part 18 - Payment Page
+		if(!latlng.lat.toFixed) return;
+
 		latlng.lat = parseFloat(latlng.lat.toFixed(8));
 		latlng.lng = parseFloat(latlng.lng.toFixed(8));
 		this.order.addressLatLng = latlng;
 		console.log(this.order.addressLatLng);
 	}
+
+	get addressLatLng(){
+		return this.order.addressLatLng!;
+	 }
 }
